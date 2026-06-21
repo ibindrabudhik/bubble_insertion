@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SORTLAB · Visualisasi Bubble &amp; Insertion Sort</title>
+  <meta name="description" content="Visualisasi interaktif bergaya osiloskop untuk bubble sort dan insertion sort — telusuri array langkah demi langkah sementara pseudokode dan Python ikut menyala baris demi baris." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">◍</span>
+      <div class="brand-text">
+        <h1>Sort<em>Lab</em></h1>
+        <p class="tagline">Dua algoritma pengurutan klasik</p>
+      </div>
+    </div>
+    <nav class="algo-switch" role="tablist" aria-label="Algoritma">
+      <button class="algo-tab is-active" data-algo="bubble" role="tab" aria-selected="true">
+        <span class="tab-idx">01</span> Bubble Sort
+      </button>
+      <button class="algo-tab" data-algo="insertion" role="tab" aria-selected="false">
+        <span class="tab-idx">02</span> Insertion Sort
+      </button>
+    </nav>
+  </header>
+
+  <main class="lab">
+    <!-- LEFT: the signal / array trace -->
+    <section class="scope panel" aria-label="Visualisasi Array">
+      <div class="panel-head">
+        <h2 class="panel-title">Jejak Sinyal</h2>
+        <p class="step-readout"><span id="stepNow">0</span><span class="slash">/</span><span id="stepTotal">0</span></p>
+      </div>
+
+      <div class="scope-screen">
+        <div id="bars" class="bars" role="img" aria-label="Batang yang mewakili nilai array"></div>
+      </div>
+
+      <p id="narration" class="narration">Tekan <kbd>Array Baru</kbd> untuk memuat sinyal baru, lalu telusuri jejaknya langkah demi langkah.</p>
+
+      <div class="legend">
+        <span class="lg lg-cmp"><i></i>banding</span>
+        <span class="lg lg-swap"><i></i>tukar / geser</span>
+        <span class="lg lg-key"><i></i>kunci</span>
+        <span class="lg lg-sorted"><i></i>terurut</span>
+      </div>
+
+      <div class="meters">
+        <div class="meter"><label>i</label><output id="varI">–</output></div>
+        <div class="meter"><label>j</label><output id="varJ">–</output></div>
+        <div class="meter"><label>kunci</label><output id="varKey">–</output></div>
+        <div class="meter"><label>banding</label><output id="cntCmp">0</output></div>
+        <div class="meter"><label>tulis</label><output id="cntSwap">0</output></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: the code traces -->
+    <section class="codes">
+      <div class="panel code-panel" aria-label="Jejak pseudokode">
+        <div class="panel-head">
+          <h2 class="panel-title">Pseudokode</h2>
+          <span class="chip" id="pseudoChip">berkomentar</span>
+        </div>
+        <pre id="pseudoCode" class="code" tabindex="0"></pre>
+      </div>
+
+      <div class="panel code-panel" aria-label="Jejak Python">
+        <div class="panel-head">
+          <h2 class="panel-title">Python</h2>
+          <span class="chip chip-py">.py</span>
+        </div>
+        <pre id="pyCode" class="code" tabindex="0"></pre>
+      </div>
+    </section>
+  </main>
+
+  <!-- TRANSPORT CONTROLS -->
+  <footer class="transport panel">
+    <div class="transport-group">
+      <button id="btnNew" class="ctl ctl-ghost" title="Buat array acak baru (N)">
+        <span class="ctl-glyph">⟳</span> array Baru
+      </button>
+      <button id="btnReset" class="ctl ctl-ghost" title="Ulang jejak dari langkah 0">
+        <span class="ctl-glyph">⏮</span> Ulang
+      </button>
+    </div>
+
+    <div class="transport-group transport-core">
+      <button id="btnPrev" class="ctl" title="Langkah sebelumnya (←)"><span class="ctl-glyph">◂◂</span></button>
+      <button id="btnPlay" class="ctl ctl-primary" title="Putar / Jeda (Spasi)">
+        <span class="ctl-glyph" id="playGlyph">▶</span><span id="playLabel">Putar</span>
+      </button>
+      <button id="btnNext" class="ctl" title="Langkah berikutnya (→)"><span class="ctl-glyph">▸▸</span></button>
+    </div>
+
+    <div class="transport-group transport-knobs">
+      <label class="knob">
+        <span>ukuran</span>
+        <input id="sizeRange" type="range" min="5" max="22" value="11" />
+        <output id="sizeOut">11</output>
+      </label>
+      <label class="knob">
+        <span>kecepatan</span>
+        <input id="speedRange" type="range" min="1" max="10" value="6" />
+        <output id="speedOut">6</output>
+      </label>
+    </div>
+  </footer>
+
+  <div class="credit">
+    <span>SORTLAB</span> · O(n²) · dibuat untuk yang penasaran
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
